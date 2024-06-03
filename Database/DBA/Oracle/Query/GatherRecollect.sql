@@ -1,0 +1,9 @@
+BEGIN
+--スキーマ単位で統計情報取得
+DBMS_STATS.GATHER_SCHEMA_STATS (
+OWNNAME => '&1'
+,OPTIONS => 'GATHER'
+);
+END;
+/
+EXIT;
