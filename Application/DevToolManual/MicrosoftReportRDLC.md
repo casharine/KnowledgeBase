@@ -2,7 +2,8 @@
 
 ## はじめに
 Microsoft RDLCとはMicrosoft社が無償で提供しているMicrosoftReportService用の帳票作成ツールです。
-本ツールに限らず帳票ソフト全般クセはありますし、高価な某帳票ソフトと機能的に遜色なく使えました。
+本ツールに限らず帳票ソフト全般クセはありますし、ActiveReportやSVFX-Designerと機能的に遜色なく使えました。
+本ツールについてはよく仕様される細かな設定がわかりやすくまとまっているサイトが少なく、良く使用される機能を中心に調査しドキュメント化しました。
 
 ## 導入方法
 以下の環境を用意します。
@@ -16,14 +17,16 @@ IDE:VisualStuido 2005 以降
 ## 開発方法
 
 ### 編集対象ファイル
-*.rdlc*Report.cs
+*.rdlc  
+*Report.cs
     
 ### データバインド
 1. ［表示］ ［レポートデータ］を押下しデータバインドを開始する
    - データセット一覧を確認できる ※クラス名のデータセットが構造体としてセットされている
 2.  [*Report.cs] にプロパティを作成する
 3. ［レポートデータ］ のプロパティを右クリックで更新する
-    
+- ※getプロパティをカスタマイズすればわざわざ式で加工せずともデータを加工できるため推奨
+
 ### デザインの編集
 - 基本事項
   - 基本的な項目はUIからvalueに設定できる  
@@ -43,7 +46,7 @@ IDE:VisualStuido 2005 以降
 - 罫線の設定
   - プロパティ［BorderStyle］から対応項目のvalueを選択し設定できる
   - 動的にIIFで設定も可能  
-  ex. =IIf(Fields!ShiireBi.Value & Fields!ShiiresakiCode.Value = Previous(Fields!ShiireBi.Value) & Previous(Fields!ShiiresakiCode.Value), "Dotted", "Solid")
+  ex. =IIf(Fields!ShiireBi.Value & Fields!ShiiresakiCode.Value = Previous(Fields!ShiireBi.Value) & Previous(Fields!ShiiresakiCode.Value), "Dotted", "Solid")  
 ![](./img/MicroSoftReport_2024-06-05-14-30-02.png)
 
 
