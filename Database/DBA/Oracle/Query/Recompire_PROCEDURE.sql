@@ -1,15 +1,15 @@
---ƒvƒƒV[ƒWƒƒƒŠƒRƒ“ƒpƒCƒ‹‚ğŠeƒXƒL[ƒ}‚ÅÀs
+--ï¿½vï¿½ï¿½ï¿½Vï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½eï¿½Xï¿½Lï¿½[ï¿½}ï¿½Åï¿½ï¿½s
 BEGIN
-	for cur in (SELECT object_name, object_type FROM user_objects WHERE object_type = 'PROCEDURE')
-	loop
-		dbms_output.put_line(cur.object_name);
-		BEGIN
-			dbms_output.put_line('ALTER ' || cur.object_type || ' ' || cur.object_name || ' COMPILE');
-			execute immediate 'ALTER ' || cur.object_type || ' ' || cur.object_name || ' COMPILE';
-		exception when others then
-			dbms_output.put_line('ERR' || cur.object_name);
-		END;
-	end loop;
+for cur in (SELECT object_name, object_type FROM user_objects WHERE object_type = 'PROCEDURE')
+loop
+dbms_output.put_line(cur.object_name);
+BEGIN
+dbms_output.put_line('ALTER ' || cur.object_type || ' ' || cur.object_name || ' COMPILE');
+execute immediate 'ALTER ' || cur.object_type || ' ' || cur.object_name || ' COMPILE';
+exception when others then
+dbms_output.put_line('ERR' || cur.object_name);
+END;
+end loop;
 END;
 /
 EXIT;
