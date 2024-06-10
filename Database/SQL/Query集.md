@@ -4,28 +4,28 @@
   - [目次](#目次)
   - [はじめに](#はじめに)
   - [SQLServer管理関連](#sqlserver管理関連)
-        - [接続中セッションの確認](#接続中セッションの確認)
-        - [復元していますで停まってしまったDBを使用可能にする](#復元していますで停まってしまったdbを使用可能にする)
-        - [シングルユーザーモードを解除する](#シングルユーザーモードを解除する)
-        - [SQLServerのGrep検索](#sqlserverのgrep検索)
+      - [接続中セッションの確認](#接続中セッションの確認)
+      - [復元していますで停まってしまったDBを使用可能にする](#復元していますで停まってしまったdbを使用可能にする)
+      - [シングルユーザーモードを解除する](#シングルユーザーモードを解除する)
+      - [SQLServerのGrep検索](#sqlserverのgrep検索)
   - [Oracle管理関連](#oracle管理関連)
-        - [全てのオブジェクトの更新時間や作成時間を確認する](#全てのオブジェクトの更新時間や作成時間を確認する)
-        - [異なるスキーマのテーブル構造を比較する](#異なるスキーマのテーブル構造を比較する)
+      - [全てのオブジェクトの更新時間や作成時間を確認する](#全てのオブジェクトの更新時間や作成時間を確認する)
+      - [異なるスキーマのテーブル構造を比較する](#異なるスキーマのテーブル構造を比較する)
   - [保守関連](#保守関連)
-        - [Select結果の一部を変更してINSERT文を生成する方法](#select結果の一部を変更してinsert文を生成する方法)
-        - [Select結果の一部を変更してUPD文を生成する方法](#select結果の一部を変更してupd文を生成する方法)
+      - [Select結果の一部を変更してINSERT文を生成する方法](#select結果の一部を変更してinsert文を生成する方法)
+      - [Select結果の一部を変更してUPD文を生成する方法](#select結果の一部を変更してupd文を生成する方法)
 
 ## はじめに
 便利なクエリ、よくコピペするクエリ、簡単だが忘れてしまうクエリ等まとめていきます
 
 ## SQLServer管理関連
-##### 接続中セッションの確認
+#### 接続中セッションの確認
 ```select * from sys.dm_exec_sessions where host_name is not NULL```
-##### 復元していますで停まってしまったDBを使用可能にする
+#### 復元していますで停まってしまったDBを使用可能にする
 ```restore database [データベース名] with recovery```
-##### シングルユーザーモードを解除する
+#### シングルユーザーモードを解除する
 ```ALTER DATABASE  [データベース名] SET MULTI_USER```
-##### SQLServerのGrep検索
+#### SQLServerのGrep検索
   ```
   SELECT 
       o.name AS Object_Name,
@@ -41,14 +41,15 @@
   ```
 
 ## Oracle管理関連
-##### 全てのオブジェクトの更新時間や作成時間を確認する
+#### 全てのオブジェクトの更新時間や作成時間を確認する
+本番のスキーマとの差分比較を行いリリースにそなえます
 ```
 SELECT a.OBJECT_NAME, a.OBJECT_TYPE, a.CREATED, a.LAST_DDL_TIME, a.TIMESTAMP, a.STATUS
 FROM user_objects a
 order by a.LAST_DDL_TIME desc
 ```
 
-##### 異なるスキーマのテーブル構造を比較する
+#### 異なるスキーマのテーブル構造を比較する
 - FullOuter
 ```select * from(
     select  table_name
@@ -81,7 +82,7 @@ where        owner='SchemaNameB'
 ```
 
 ## 保守関連
-##### Select結果の一部を変更してINSERT文を生成する方法
+#### Select結果の一部を変更してINSERT文を生成する方法
 ```
 INSERT INTO TableA
 SELECT   
@@ -101,7 +102,7 @@ LEFT JOIN  AS TableB b
 ON a.GroupKey = b.GroupKey
 WHERE a.GroupKey = 6
 ```
-##### Select結果の一部を変更してUPD文を生成する方法
+#### Select結果の一部を変更してUPD文を生成する方法
 ```
 UPDATE Table
 SET
